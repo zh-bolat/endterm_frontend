@@ -1117,3 +1117,38 @@ img {
     transform: translateY(8px);
   }
 }
+
+/* ===== Navbar tools: round icon buttons (theme, favorites) ===== */
+.icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.icon-btn:hover {
+  background-color: var(--color-border);
+}
+
+.icon-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--color-accent-soft);
+}
+
+/* Only one icon is visible: the moon in light mode, the sun in dark mode */
+.icon-sun,
+[data-theme="dark"] .icon-moon {
+  display: none;
+}
+
+[data-theme="dark"] .icon-sun {
+  display: block;
+}

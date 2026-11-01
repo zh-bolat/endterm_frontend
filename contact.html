@@ -39,7 +39,14 @@
             <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="contact.html">Contact</a></li>
           </ul>
-          <a class="btn btn-accent btn-small" href="contact.html">Visit showroom</a>
+          <div class="nav-tools d-flex align-items-center gap-2">
+            <!-- Theme switcher: js/main.js swaps light and dark -->
+            <button class="icon-btn" type="button" id="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+              <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+              <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5" fill="currentColor"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+            </button>
+            <a class="btn btn-accent btn-small" href="contact.html">Visit showroom</a>
+          </div>
         </div>
       </div>
     </nav>
