@@ -76,3 +76,30 @@ function toggleFavorite(productId) {
   document.dispatchEvent(new CustomEvent('favorites:change'));
   return !wasSaved;
 }
+
+/* ===== Toast — short message in the corner of the screen =====
+   type is "success" (default) or "info". The toast removes itself. */
+function showToast(message, type) {
+  let stack = document.querySelector('.toast-stack');
+
+  // The container is created only once, the first time a toast is shown
+  if (!stack) {
+    stack = document.createElement('div');
+    stack.className = 'toast-stack';
+    stack.setAttribute('aria-live', 'polite');
+    document.body.appendChild(stack);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = 'toast-message toast-' + (type || 'success');
+  toast.textContent = message;
+  stack.appendChild(toast);
+
+  setTimeout(function () {
+    toast.classList.add('is-hiding');
+  }, 2600);
+
+  setTimeout(function () {
+    toast.remove();
+  }, 3000);
+}

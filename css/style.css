@@ -1040,3 +1040,49 @@ img {
     width: 100%;
   }
 }
+
+/* ==========================================================
+   Endterm — interactive components (JavaScript and jQuery)
+   ========================================================== */
+
+/* ===== Toast messages (created by showToast in js/utils.js) ===== */
+.toast-stack {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1080;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast-message {
+  padding: 12px 20px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-text);
+  color: var(--color-bg);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  animation: toast-in 0.25s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.toast-info {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+.toast-message.is-hiding {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
