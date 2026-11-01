@@ -18,6 +18,11 @@
   --color-accent-soft-hover: #d7e7fb;
   --color-pill: #d9efe9;
   --color-pill-dot: #2a8c7a;
+  --color-header-bg: rgba(255, 255, 255, 0.85);
+  --color-chip-bg: rgba(255, 255, 255, 0.92);
+  --color-chip-text: #1d1d1f;
+  --color-danger: #d70015;
+  --color-success: #1e8e3e;
 
   /* Shapes */
   --radius: 16px;
@@ -31,6 +36,32 @@
 
   /* Spacing between page sections (made smaller in the media queries) */
   --section-space: 120px;
+}
+
+/* ===== Dark theme — the same tokens with dark values =====
+   js/theme.js puts data-theme="dark" on <html>; every rule that uses
+   var(--color-...) changes automatically. */
+[data-theme="dark"] {
+  --color-text: #f5f5f7;
+  --color-muted: #a1a1a6;
+  --color-bg: #101012;
+  --color-surface: #1c1c1f;
+  --color-border: #2c2c30;
+  --color-border-strong: #3a3a3f;
+  --color-accent: #2997ff;
+  --color-accent-hover: #4aa8ff;
+  --color-accent-soft: #14304d;
+  --color-accent-soft-hover: #1a3d61;
+  --color-pill: #183a33;
+  --color-pill-dot: #5fd0b8;
+  --color-header-bg: rgba(16, 16, 18, 0.85);
+  --color-danger: #ff6961;
+  --color-success: #5cd17a;
+
+  /* Bootstrap reads these for form controls and tables */
+  --bs-body-bg: var(--color-bg);
+  --bs-body-color: var(--color-text);
+  color-scheme: dark;
 }
 
 /* ===== Base — element selectors ===== */
@@ -197,7 +228,7 @@ img {
   position: sticky;
   top: 0;
   z-index: 1030;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: var(--color-header-bg);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--color-border);
 }
@@ -343,10 +374,10 @@ img {
   gap: 8px;
   padding: 10px 18px;
   border-radius: var(--radius-pill);
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: var(--color-chip-bg);
   font-size: 0.9375rem;
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-chip-text);
 }
 
 .chip-dot {
@@ -358,7 +389,7 @@ img {
 
 .chip-price {
   font-weight: 500;
-  color: var(--color-muted);
+  color: #6e6e73; /* the chip stays white in both themes */
 }
 
 /* ===== Home: categories — CSS Grid ===== */
@@ -644,10 +675,10 @@ img {
   left: 16px;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: var(--color-chip-bg);
   font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-chip-text);
 }
 
 .product-tag-new {
