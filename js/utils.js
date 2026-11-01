@@ -44,3 +44,35 @@ function writeStorage(key, value) {
     // Nothing to do: the page still works, it just will not remember the value
   }
 }
+
+/* ===== Favorites — saved product ids in localStorage ===== */
+const FAVORITES_KEY = 'forma-favorites';
+
+function getFavorites() {
+  return readStorage(FAVORITES_KEY, []);
+}
+
+function isFavorite(productId) {
+  return getFavorites().includes(productId);
+}
+
+// Adds the product if it is not saved yet, removes it otherwise.
+// Returns true when the product is a favorite after the call.
+function toggleFavorite(productId) {
+  let favorites = getFavorites();
+  const wasSaved = favorites.includes(productId);
+
+  if (wasSaved) {
+    favorites = favorites.filter(function (id) {
+      return id !== productId;
+    });
+  } else {
+    favorites.push(productId);
+  }
+
+  writeStorage(FAVORITES_KEY, favorites);
+
+  // Tell every part of the page (navbar counter, panel, cards) that favorites changed
+  document.dispatchEvent(new CustomEvent('favorites:change'));
+  return !wasSaved;
+}
