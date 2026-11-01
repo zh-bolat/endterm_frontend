@@ -72,6 +72,7 @@ body {
   color: var(--color-text);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1,
@@ -1151,4 +1152,20 @@ img {
 
 [data-theme="dark"] .icon-sun {
   display: block;
+}
+
+/* ===== Dark theme details ===== */
+/* Photos are a little dimmer so they do not glare on a dark page */
+[data-theme="dark"] img {
+  filter: brightness(0.92);
+}
+
+/* White feature cards on the grey section become dark cards */
+[data-theme="dark"] .feature,
+[data-theme="dark"] .compare-card {
+  background-color: var(--color-bg);
+}
+
+[data-theme="dark"] .toast-message {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
