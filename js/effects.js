@@ -60,4 +60,30 @@ $(function () {
     });
   });
 
+
+  /* ===== FAQ accordion on the About page: slideDown / slideUp =====
+     Only one answer is open at a time, so the list stays short. */
+  $('#faq .faq-question').on('click', function () {     // descendant selector
+    const $question = $(this);
+    const $item = $question.parent();                    // traversal: parent()
+    const $answer = $question.next('.faq-answer');       // traversal: next()
+    const isOpen = $item.hasClass('is-open');
+
+    // Close the other open items
+    $item.siblings('.is-open')                           // traversal: siblings()
+      .removeClass('is-open')
+      .find('.faq-answer').slideUp(250)
+      .end()
+      .find('.faq-question').attr('aria-expanded', 'false');
+
+    // Open or close the clicked one
+    $item.toggleClass('is-open', !isOpen);
+    $question.attr('aria-expanded', String(!isOpen));
+    if (isOpen) {
+      $answer.slideUp(250);
+    } else {
+      $answer.slideDown(250);
+    }
+  });
+
 });
