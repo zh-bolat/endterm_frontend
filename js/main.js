@@ -45,6 +45,80 @@ function initThemeToggle() {
   });
 }
 
+/* ===== Favorites counter and panel list ===== */
+
+// Builds one <li> of the favorites panel for a product
+function createFavoriteItem(product) {
+  const item = document.createElement('li');
+  item.className = 'favorite-item';
+  item.dataset.id = product.id;
+
+  const image = document.createElement('img');
+  image.src = product.image;
+  image.alt = '';
+
+  const info = document.createElement('div');
+  info.className = 'favorite-info';
+  info.innerHTML = '<span class="favorite-name"></span><span class="favorite-price"></span>';
+  info.querySelector('.favorite-name').textContent = product.name;
+  info.querySelector('.favorite-price').textContent = formatPrice(product.price);
+
+  const remove = document.createElement('button');
+  remove.type = 'button';
+  remove.className = 'favorite-remove';
+  remove.textContent = 'Remove';
+  remove.setAttribute('aria-label', 'Remove ' + product.name + ' from favorites');
+
+  item.append(image, info, remove);
+  return item;
+}
+
+// Redraws the navbar badge and the panel list from localStorage
+function renderFavorites() {
+  const favoriteIds = getFavorites();
+  const count = document.getElementById('favorites-count');
+  const list = document.getElementById('favorites-list');
+  const empty = document.getElementById('favorites-empty');
+
+  if (count) {
+    count.textContent = favoriteIds.length;
+    count.classList.toggle('is-empty', favoriteIds.length === 0);
+  }
+
+  if (!list) {
+    return;
+  }
+
+  list.innerHTML = '';
+  favoriteIds.forEach(function (id) {
+    const product = findProductById(id);
+    if (product) {
+      list.appendChild(createFavoriteItem(product));
+    }
+  });
+
+  // The hint is shown only while nothing is saved
+  empty.style.display = favoriteIds.length === 0 ? 'block' : 'none';
+}
+
+// Short pop animation on the badge after a change
+function bumpFavoritesCount() {
+  const count = document.getElementById('favorites-count');
+  if (!count) {
+    return;
+  }
+  count.classList.remove('is-bumped');
+  void count.offsetWidth; // restart the CSS animation
+  count.classList.add('is-bumped');
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   initThemeToggle();
+  renderFavorites();
+
+  // toggleFavorite() in utils.js fires this event after every change
+  document.addEventListener('favorites:change', function () {
+    renderFavorites();
+    bumpFavoritesCount();
+  });
 });
