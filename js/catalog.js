@@ -13,6 +13,27 @@ function renderProducts(list) {
   });
 }
 
+// Fills the comparison table: one <tr> per product
+function renderCompareTable(list) {
+  const body = document.getElementById('compare-body');
+  body.innerHTML = '';
+
+  for (let i = 0; i < list.length; i++) {
+    const product = list[i];
+    const row = document.createElement('tr');
+    row.dataset.id = product.id;
+    row.innerHTML = `
+      <th scope="row">${product.name}</th>
+      <td>${product.category}</td>
+      <td>${product.material}</td>
+      <td>${product.size}</td>
+      <td>${product.deliveryDays} days</td>
+      <td class="price text-end">${formatPrice(product.price)}</td>`;
+    body.appendChild(row);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   renderProducts(products);
+  renderCompareTable(products);
 });
