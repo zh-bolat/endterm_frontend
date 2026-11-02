@@ -1337,3 +1337,60 @@ img {
 .back-to-top:hover {
   background-color: var(--color-surface);
 }
+
+/* ===== About: FAQ accordion (opened by jQuery) ===== */
+.faq-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--color-border-strong);
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 22px 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.faq-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-bg);
+  font-size: 1.25rem;
+  font-weight: 400;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+/* The open item gets .is-open: the plus turns into a cross */
+.faq-item.is-open .faq-icon {
+  transform: rotate(45deg);
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.faq-answer {
+  display: none; /* jQuery slideDown() shows the answer */
+  padding-bottom: 22px;
+  color: var(--color-muted);
+}
+
+.faq-answer p {
+  margin-bottom: 0;
+}
