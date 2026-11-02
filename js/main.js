@@ -112,8 +112,29 @@ function bumpFavoritesCount() {
   count.classList.add('is-bumped');
 }
 
+/* ===== Back-to-top button =====
+   The button is not in the HTML: it is created here and added to <body>. */
+function initBackToTop() {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'back-to-top';
+  button.setAttribute('aria-label', 'Back to top');
+  button.innerHTML = '<span aria-hidden="true">↑</span>';
+  document.body.appendChild(button);
+
+  // Show the button only after the visitor has scrolled down a bit
+  window.addEventListener('scroll', function () {
+    button.classList.toggle('is-visible', window.scrollY > 600);
+  });
+
+  button.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   initThemeToggle();
+  initBackToTop();
   renderFavorites();
 
   // toggleFavorite() in utils.js fires this event after every change
