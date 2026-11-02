@@ -136,7 +136,7 @@
       </div>
     </section>
 
-    <!-- Featured products: cards in a Bootstrap row / col-* grid -->
+    <!-- Featured products: cards are created by JavaScript in a Bootstrap row / col-* grid -->
     <section id="featured" class="section pt-0">
       <div class="container">
         <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-5">
@@ -147,44 +147,8 @@
           <a class="link-arrow" href="catalog.html">See all products →</a>
         </div>
 
-        <div class="row g-4 justify-content-center">
-          <div class="col-12 col-md-6 col-lg-4">
-            <article class="product-card">
-              <img class="product-card-img" src="images/product-nord-sofa.jpg" alt="Three-seat sofa in dark green velvet with wooden legs against a white wall">
-              <div class="product-card-body">
-                <div class="d-flex justify-content-between align-items-baseline gap-3">
-                  <h3 class="product-card-title">Nord sofa</h3>
-                  <span class="price">$1,490</span>
-                </div>
-                <p class="product-card-text">Deep three-seater in soft velvet on solid oak legs.</p>
-              </div>
-            </article>
-          </div>
-          <div class="col-12 col-md-6 col-lg-4">
-            <article class="product-card">
-              <img class="product-card-img" src="images/product-sunny-armchair.jpg" alt="Mustard yellow armchair next to a brass floor lamp in a living room">
-              <div class="product-card-body">
-                <div class="d-flex justify-content-between align-items-baseline gap-3">
-                  <h3 class="product-card-title">Sunny armchair</h3>
-                  <span class="price">$640</span>
-                </div>
-                <p class="product-card-text">A compact reading chair in warm mustard wool.</p>
-              </div>
-            </article>
-          </div>
-          <div class="col-12 col-md-6 col-lg-4">
-            <article class="product-card">
-              <img class="product-card-img" src="images/product-arc-lounge-chair.jpg" alt="White curved lounge chair with a bent wood frame beside a palm plant">
-              <div class="product-card-body">
-                <div class="d-flex justify-content-between align-items-baseline gap-3">
-                  <h3 class="product-card-title">Arc lounge chair</h3>
-                  <span class="price">$520</span>
-                </div>
-                <p class="product-card-text">Bent plywood frame with a soft white cushion.</p>
-              </div>
-            </article>
-          </div>
-        </div>
+        <!-- Filled by js/home.js from the products array (only featured products) -->
+        <div class="row g-4 justify-content-center" id="featured-list"></div>
       </div>
     </section>
 
@@ -281,5 +245,6 @@
   <script src="js/utils.js"></script>
   <script src="js/main.js"></script>
   <script src="js/effects.js"></script>
+  <script src="js/home.js"></script>
 </body>
 </html>

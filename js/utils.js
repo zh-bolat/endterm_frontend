@@ -103,3 +103,33 @@ function showToast(message, type) {
     toast.remove();
   }, 3000);
 }
+
+/* ===== Product card =====
+   Returns a Bootstrap column with one product card inside.
+   columnClass lets each page choose its own grid, e.g. "col-12 col-md-6 col-lg-4". */
+function createProductCard(product, columnClass) {
+  const column = document.createElement('div');
+  column.className = columnClass;
+
+  // Tag in the corner only for products that have one ("New", "Bestseller")
+  let tagHtml = '';
+  if (product.tag) {
+    const tagClass = product.tag === 'New' ? 'product-tag product-tag-new' : 'product-tag';
+    tagHtml = `<span class="${tagClass}">${product.tag}</span>`;
+  }
+
+  column.innerHTML = `
+    <article class="product-card" data-id="${product.id}">
+      ${tagHtml}
+      <img class="product-card-img" src="${product.image}" alt="${product.alt}" loading="lazy">
+      <div class="product-card-body">
+        <div class="d-flex justify-content-between align-items-baseline gap-3">
+          <h3 class="product-card-title">${product.name}</h3>
+          <span class="price">${formatPrice(product.price)}</span>
+        </div>
+        <p class="product-card-text">${product.description}</p>
+      </div>
+    </article>`;
+
+  return column;
+}
