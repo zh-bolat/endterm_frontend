@@ -75,6 +75,19 @@ $(function () {
       .children('span').text(willOpen ? '↑' : '↓');                                // children()
   });
 
+  /* ===== Smooth scrolling for links to a section on the same page =====
+     e.g. "Compare all models ↓" on the Catalog page */
+  $('a[href^="#"]').on('click', function (event) {              // attribute selector
+    const $target = $($(this).attr('href'));
+    if ($target.length === 0) {
+      return; // no such section: let the browser handle the link
+    }
+
+    event.preventDefault();
+    const headerHeight = $('.site-header').outerHeight();       // class selector
+    $('html, body').animate({ scrollTop: $target.offset().top - headerHeight - 16 }, 500);
+  });
+
   /* ===== FAQ accordion on the About page: slideDown / slideUp =====
      Only one answer is open at a time, so the list stays short. */
   $('#faq .faq-question').on('click', function () {     // descendant selector
