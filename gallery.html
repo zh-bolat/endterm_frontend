@@ -88,6 +88,9 @@
     <!-- Photos: placed with CSS Grid, some photos span two rows or two columns -->
     <section id="photos" class="section pt-0">
       <div class="container">
+        <!-- Tabs: buttons are created by js/gallery.js from the rooms array -->
+        <div class="room-filters gallery-filters" id="gallery-filters" role="group" aria-label="Filter photos by room"></div>
+
         <!-- Photos are created by js/gallery.js from the galleryPhotos array -->
         <div class="gallery-grid" id="gallery-grid"></div>
       </div>
