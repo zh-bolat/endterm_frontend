@@ -107,3 +107,64 @@ const rooms = [
   { value: 'dining', label: 'Dining' },
   { value: 'workspace', label: 'Workspace' }
 ];
+
+// Array 3: photos on the Gallery page.
+// size "tall" spans two rows, "wide" spans two columns in the grid.
+const galleryPhotos = [
+  {
+    image: 'images/gallery-reading-corner.jpg',
+    alt: 'Beige room with an orange armchair, a cane sideboard, a round mirror and large green plants',
+    title: 'Reading corner',
+    district: 'Esil',
+    room: 'living',
+    size: 'tall'
+  },
+  {
+    image: 'images/gallery-loft-lounge.jpg',
+    alt: 'Open office lounge with a grey tufted sofa, two grey armchairs and bar stools along a brick wall',
+    title: 'Office lounge',
+    district: 'Baikonur',
+    room: 'workspace',
+    size: 'wide'
+  },
+  {
+    image: 'images/gallery-bedroom.jpg',
+    alt: 'Bedroom with a cream buttoned headboard, grey bedding, black nightstands and an upholstered bench',
+    title: 'Main bedroom',
+    district: 'Saryarka',
+    room: 'bedroom',
+    size: ''
+  },
+  {
+    image: 'images/gallery-blue-sofa.jpg',
+    alt: 'Light blue sofa with patterned cushions under a framed city print, next to a pink floor lamp',
+    title: 'Living room',
+    district: 'Left Bank',
+    room: 'living',
+    size: ''
+  },
+  {
+    image: 'images/gallery-grey-sofa.jpg',
+    alt: 'Grey tufted sofa with teal cushions and a white coffee table in front of a bright window, a cat on the sill',
+    title: 'Family room',
+    district: 'Nura',
+    room: 'living',
+    size: ''
+  },
+  {
+    image: 'images/gallery-black-loveseat.jpg',
+    alt: 'Small black sofa next to a white chest of drawers, a potted tree and a black floor lamp',
+    title: 'Guest room',
+    district: 'Esil',
+    room: 'bedroom',
+    size: ''
+  },
+  {
+    image: 'images/gallery-wall-shelves.jpg',
+    alt: 'Floating oak and white wall shelves around a framed print above a low media shelf',
+    title: 'Media wall',
+    district: 'Saryarka',
+    room: 'living',
+    size: ''
+  }
+];

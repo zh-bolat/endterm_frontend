@@ -88,64 +88,8 @@
     <!-- Photos: placed with CSS Grid, some photos span two rows or two columns -->
     <section id="photos" class="section pt-0">
       <div class="container">
-        <div class="gallery-grid">
-          <figure class="gallery-item gallery-item-tall">
-            <img src="images/gallery-reading-corner.jpg" alt="Beige room with an orange armchair, a cane sideboard, a round mirror and large green plants">
-            <figcaption class="image-chip">
-              <span class="chip-dot"></span>
-              Reading corner
-              <span class="chip-price">Esil</span>
-            </figcaption>
-          </figure>
-          <figure class="gallery-item gallery-item-wide">
-            <img src="images/gallery-loft-lounge.jpg" alt="Open office lounge with a grey tufted sofa, two grey armchairs and bar stools along a brick wall">
-            <figcaption class="image-chip">
-              <span class="chip-dot"></span>
-              Office lounge
-              <span class="chip-price">Baikonur</span>
-            </figcaption>
-          </figure>
-          <figure class="gallery-item">
-            <img src="images/gallery-bedroom.jpg" alt="Bedroom with a cream buttoned headboard, grey bedding, black nightstands and an upholstered bench">
-            <figcaption class="image-chip">
-              <span class="chip-dot"></span>
-              Main bedroom
-              <span class="chip-price">Saryarka</span>
-            </figcaption>
-          </figure>
-          <figure class="gallery-item">
-            <img src="images/gallery-blue-sofa.jpg" alt="Light blue sofa with patterned cushions under a framed city print, next to a pink floor lamp">
-            <figcaption class="image-chip">
-              <span class="chip-dot"></span>
-              Living room
-              <span class="chip-price">Left Bank</span>
-            </figcaption>
-          </figure>
-          <figure class="gallery-item">
-            <img src="images/gallery-grey-sofa.jpg" alt="Grey tufted sofa with teal cushions and a white coffee table in front of a bright window, a cat on the sill">
-            <figcaption class="image-chip">
-              <span class="chip-dot"></span>
-              Family room
-              <span class="chip-price">Nura</span>
-            </figcaption>
-          </figure>
-          <figure class="gallery-item">
-            <img src="images/gallery-black-loveseat.jpg" alt="Small black sofa next to a white chest of drawers, a potted tree and a black floor lamp">
-            <figcaption class="image-chip">
-              <span class="chip-dot"></span>
-              Guest room
-              <span class="chip-price">Esil</span>
-            </figcaption>
-          </figure>
-          <figure class="gallery-item">
-            <img src="images/gallery-wall-shelves.jpg" alt="Floating oak and white wall shelves around a framed print above a low media shelf">
-            <figcaption class="image-chip">
-              <span class="chip-dot"></span>
-              Media wall
-              <span class="chip-price">Saryarka</span>
-            </figcaption>
-          </figure>
-        </div>
+        <!-- Photos are created by js/gallery.js from the galleryPhotos array -->
+        <div class="gallery-grid" id="gallery-grid"></div>
       </div>
     </section>
 
@@ -209,5 +153,6 @@
   <script src="js/utils.js"></script>
   <script src="js/main.js"></script>
   <script src="js/effects.js"></script>
+  <script src="js/gallery.js"></script>
 </body>
 </html>
