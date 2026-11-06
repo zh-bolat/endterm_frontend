@@ -7,6 +7,7 @@
 const productList = document.getElementById('product-list');
 const searchInput = document.getElementById('catalog-search');
 const roomFilters = document.getElementById('room-filters');
+const sortSelect = document.getElementById('catalog-sort');
 
 // Current state of the toolbar; every control changes one field and re-renders
 const filters = {
@@ -21,12 +22,31 @@ function matchesSearch(product, text) {
   return haystack.includes(text.trim().toLowerCase());
 }
 
-// Returns a new array with only the products that pass every filter
+// Returns a sorted copy of the list; the original array is not changed
+function sortProducts(list, sortBy) {
+  const sorted = list.slice();
+
+  if (sortBy === 'price-asc') {
+    sorted.sort(function (a, b) { return a.price - b.price; });
+  } else if (sortBy === 'price-desc') {
+    sorted.sort(function (a, b) { return b.price - a.price; });
+  } else if (sortBy === 'name') {
+    sorted.sort(function (a, b) { return a.name.localeCompare(b.name); });
+  } else {
+    // "featured": featured products first, the rest keep their order
+    sorted.sort(function (a, b) { return Number(b.featured) - Number(a.featured); });
+  }
+
+  return sorted;
+}
+
+// Returns a new array with only the products that pass every filter, sorted
 function getFilteredProducts(list, currentFilters) {
-  return list.filter(function (product) {
+  const filtered = list.filter(function (product) {
     const roomMatches = currentFilters.room === 'all' || product.room === currentFilters.room;
     return roomMatches && matchesSearch(product, currentFilters.search);
   });
+  return sortProducts(filtered, currentFilters.sort);
 }
 
 // Creates one filter button per room from the rooms array
@@ -89,6 +109,12 @@ document.addEventListener('DOMContentLoaded', function () {
   setActiveRoom(filters.room);
   renderCompareTable(products);
   updateCatalog();
+
+  // "change" fires once a new option is chosen
+  sortSelect.addEventListener('change', function (event) {
+    filters.sort = event.target.value;
+    updateCatalog();
+  });
 
   // One listener on the group handles every room button (event delegation)
   roomFilters.addEventListener('click', function (event) {
