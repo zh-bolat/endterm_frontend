@@ -116,6 +116,16 @@ function createEmptyState() {
   return empty;
 }
 
+// Reads ?room=bedroom from the address (used by the category tiles on Home).
+// Returns "all" when the value is missing or unknown.
+function getRoomFromUrl() {
+  const value = new URLSearchParams(window.location.search).get('room');
+  const isKnownRoom = rooms.some(function (room) {
+    return room.value === value;
+  });
+  return isKnownRoom ? value : 'all';
+}
+
 // Puts every control back to its starting value
 function resetFilters() {
   filters.search = '';
@@ -145,6 +155,7 @@ function updateCatalog() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  filters.room = getRoomFromUrl();
   renderRoomFilters();
   setActiveRoom(filters.room);
   renderCompareTable(products);
