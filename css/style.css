@@ -1481,3 +1481,46 @@ img {
   font-weight: 600;
   color: var(--color-text);
 }
+
+/* ===== Heart button on product cards ===== */
+.favorite-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--color-chip-bg);
+  color: var(--color-chip-text);
+  transition: transform 0.2s ease;
+}
+
+.favorite-btn svg path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.08);
+}
+
+.favorite-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--color-accent-soft);
+}
+
+/* Saved: filled red heart */
+.favorite-btn.is-saved {
+  color: #e0245e;
+}
+
+.favorite-btn.is-saved svg path {
+  fill: currentColor;
+}

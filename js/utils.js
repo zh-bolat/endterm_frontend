@@ -118,9 +118,14 @@ function createProductCard(product, columnClass) {
     tagHtml = `<span class="${tagClass}">${product.tag}</span>`;
   }
 
+  const saved = isFavorite(product.id);
+
   column.innerHTML = `
     <article class="product-card" data-id="${product.id}">
       ${tagHtml}
+      <button class="favorite-btn${saved ? ' is-saved' : ''}" type="button" aria-pressed="${saved}" aria-label="Save ${product.name} to favorites">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.3C1.5 7.9 3.6 4.5 7 4.5c2.1 0 3.6 1.2 5 3 1.4-1.8 2.9-3 5-3 3.4 0 5.5 3.4 4.3 6.7-1.8 4.7-9.3 9.3-9.3 9.3z"/></svg>
+      </button>
       <img class="product-card-img" src="${product.image}" alt="${product.alt}" loading="lazy">
       <div class="product-card-body">
         <div class="d-flex justify-content-between align-items-baseline gap-3">

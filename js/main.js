@@ -132,14 +132,44 @@ function initBackToTop() {
   });
 }
 
+/* ===== Heart buttons on product cards (Home and Catalog) ===== */
+
+// Makes every heart on the page match the saved favorites
+function syncFavoriteButtons() {
+  document.querySelectorAll('.product-card').forEach(function (card) {
+    const button = card.querySelector('.favorite-btn');
+    const saved = isFavorite(card.dataset.id);
+    button.classList.toggle('is-saved', saved);
+    button.setAttribute('aria-pressed', String(saved));
+  });
+}
+
+function initFavoriteButtons() {
+  // Cards are created by JavaScript, so one listener on the document catches every heart
+  document.addEventListener('click', function (event) {
+    const button = event.target.closest('.favorite-btn');
+    if (!button) {
+      return;
+    }
+
+    const card = button.closest('.product-card');
+    const product = findProductById(card.dataset.id);
+    const saved = toggleFavorite(product.id);
+
+    showToast(saved ? product.name + ' saved to favorites' : product.name + ' removed from favorites', saved ? 'success' : 'info');
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   initThemeToggle();
+  initFavoriteButtons();
   initBackToTop();
   renderFavorites();
 
   // toggleFavorite() in utils.js fires this event after every change
   document.addEventListener('favorites:change', function () {
     renderFavorites();
+    syncFavoriteButtons();
     bumpFavoritesCount();
   });
 });
