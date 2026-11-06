@@ -1524,3 +1524,43 @@ img {
 .favorite-btn.is-saved svg path {
   fill: currentColor;
 }
+
+/* ===== Product details (opened with jQuery slideToggle) ===== */
+.details-toggle {
+  margin-top: 14px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-accent);
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.details-toggle:hover {
+  color: var(--color-accent-hover);
+}
+
+.product-details {
+  display: none; /* shown by jQuery */
+  margin: 14px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border-strong);
+  font-size: 0.875rem;
+}
+
+.product-details div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.product-details dt {
+  font-weight: 500;
+  color: var(--color-muted);
+}
+
+.product-details dd {
+  margin: 0;
+  text-align: right;
+}

@@ -61,6 +61,20 @@ $(function () {
   });
 
 
+  /* ===== Product details on the cards: slideToggle =====
+     Cards are created by JavaScript after the page loads,
+     so the click is delegated from the document to .details-toggle. */
+  $(document).on('click', '.details-toggle', function () {
+    const $button = $(this);
+    const $details = $button.closest('.product-card').find('.product-details');   // closest() + find()
+    const willOpen = !$details.is(':visible');
+
+    $details.stop(true, true).slideToggle(250);
+    $button.toggleClass('is-open', willOpen)
+      .attr('aria-expanded', String(willOpen))
+      .children('span').text(willOpen ? '↑' : '↓');                                // children()
+  });
+
   /* ===== FAQ accordion on the About page: slideDown / slideUp =====
      Only one answer is open at a time, so the list stays short. */
   $('#faq .faq-question').on('click', function () {     // descendant selector

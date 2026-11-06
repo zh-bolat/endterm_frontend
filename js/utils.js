@@ -133,6 +133,13 @@ function createProductCard(product, columnClass) {
           <span class="price">${formatPrice(product.price)}</span>
         </div>
         <p class="product-card-text">${product.description}</p>
+        <button class="details-toggle" type="button" aria-expanded="false">Details <span aria-hidden="true">↓</span></button>
+        <dl class="product-details">
+          <div><dt>Material</dt><dd>${product.material}</dd></div>
+          <div><dt>Size, cm</dt><dd>${product.size}</dd></div>
+          <div><dt>Delivery</dt><dd>${product.deliveryDays} days</dd></div>
+          <div><dt>Room</dt><dd>${getRoomLabel(product.room)}</dd></div>
+        </dl>
       </div>
     </article>`;
 
