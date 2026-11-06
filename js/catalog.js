@@ -6,6 +6,7 @@
 
 const productList = document.getElementById('product-list');
 const searchInput = document.getElementById('catalog-search');
+const roomFilters = document.getElementById('room-filters');
 
 // Current state of the toolbar; every control changes one field and re-renders
 const filters = {
@@ -23,8 +24,31 @@ function matchesSearch(product, text) {
 // Returns a new array with only the products that pass every filter
 function getFilteredProducts(list, currentFilters) {
   return list.filter(function (product) {
-    return matchesSearch(product, currentFilters.search);
+    const roomMatches = currentFilters.room === 'all' || product.room === currentFilters.room;
+    return roomMatches && matchesSearch(product, currentFilters.search);
   });
+}
+
+// Creates one filter button per room from the rooms array
+function renderRoomFilters() {
+  rooms.forEach(function (room) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'filter-chip';
+    button.textContent = room.label;
+    button.dataset.room = room.value;
+    roomFilters.appendChild(button);
+  });
+}
+
+// Highlights the active room button
+function setActiveRoom(roomValue) {
+  const buttons = roomFilters.querySelectorAll('.filter-chip');
+  for (const button of buttons) {
+    const isActive = button.dataset.room === roomValue;
+    button.classList.toggle('is-active', isActive);
+    button.setAttribute('aria-pressed', String(isActive));
+  }
 }
 
 // Draws the given products as cards (the old cards are removed first)
@@ -61,8 +85,21 @@ function updateCatalog() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  renderRoomFilters();
+  setActiveRoom(filters.room);
   renderCompareTable(products);
   updateCatalog();
+
+  // One listener on the group handles every room button (event delegation)
+  roomFilters.addEventListener('click', function (event) {
+    const button = event.target.closest('.filter-chip');
+    if (!button) {
+      return;
+    }
+    filters.room = button.dataset.room;
+    setActiveRoom(filters.room);
+    updateCatalog();
+  });
 
   // "input" fires on every key press, so results update while typing
   searchInput.addEventListener('input', function (event) {
