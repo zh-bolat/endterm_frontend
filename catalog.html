@@ -96,6 +96,25 @@
           <a class="link-arrow" href="#compare">Compare all models ↓</a>
         </div>
 
+        <!-- Toolbar: search, room filter and sorting (handled in js/catalog.js) -->
+        <div class="catalog-toolbar" role="search">
+          <div class="toolbar-search">
+            <label class="visually-hidden" for="catalog-search">Search products</label>
+            <input class="form-control" type="search" id="catalog-search" placeholder="Search by name or material" autocomplete="off">
+          </div>
+          <div class="room-filters" id="room-filters" role="group" aria-label="Filter by room"></div>
+          <div class="toolbar-sort">
+            <label class="visually-hidden" for="catalog-sort">Sort products</label>
+            <select class="form-select" id="catalog-sort">
+              <option value="featured">Featured first</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
+              <option value="name">Name: A to Z</option>
+            </select>
+          </div>
+        </div>
+        <p class="results-count" id="results-count" aria-live="polite"></p>
+
         <!-- Product cards are created by js/catalog.js from the products array -->
         <div class="row g-4" id="product-list"></div>
       </div>

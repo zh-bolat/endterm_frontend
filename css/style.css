@@ -1394,3 +1394,74 @@ img {
 .faq-answer p {
   margin-bottom: 0;
 }
+
+/* ===== Catalog: toolbar with search, room filter and sorting ===== */
+.catalog-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.toolbar-search {
+  flex: 1 1 260px;
+}
+
+.toolbar-sort {
+  flex: 0 0 220px;
+}
+
+.catalog-toolbar .form-control,
+.catalog-toolbar .form-select {
+  padding: 10px 18px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-size: 0.9375rem;
+}
+
+.catalog-toolbar .form-select {
+  padding-right: 40px;
+  background-position: right 16px center;
+}
+
+.catalog-toolbar .form-control:focus,
+.catalog-toolbar .form-select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-soft);
+}
+
+.room-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Filter chips: grey by default, blue when active */
+.filter-chip {
+  padding: 8px 16px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.filter-chip:hover {
+  background-color: var(--color-border);
+}
+
+.filter-chip.is-active {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+.results-count {
+  margin-bottom: 24px;
+  font-size: 0.9375rem;
+  color: var(--color-muted);
+}
