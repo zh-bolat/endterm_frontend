@@ -8,6 +8,7 @@ const productList = document.getElementById('product-list');
 const searchInput = document.getElementById('catalog-search');
 const roomFilters = document.getElementById('room-filters');
 const sortSelect = document.getElementById('catalog-sort');
+const resultsCount = document.getElementById('results-count');
 
 // Current state of the toolbar; every control changes one field and re-renders
 const filters = {
@@ -99,9 +100,48 @@ function renderCompareTable(list) {
   }
 }
 
-// Applies the filters and redraws the grid
+// "1 product" / "3 products"
+function pluralize(count, word) {
+  return count + ' ' + word + (count === 1 ? '' : 's');
+}
+
+// Message with a reset button, added to the grid when nothing matches
+function createEmptyState() {
+  const empty = document.createElement('div');
+  empty.className = 'col-12 empty-state';
+  empty.innerHTML = `
+    <p class="empty-title">No products match your search.</p>
+    <p>Try another word or show every room again.</p>
+    <button class="btn btn-soft btn-small" type="button" id="reset-filters">Reset filters</button>`;
+  return empty;
+}
+
+// Puts every control back to its starting value
+function resetFilters() {
+  filters.search = '';
+  filters.room = 'all';
+  filters.sort = 'featured';
+  searchInput.value = '';
+  sortSelect.value = 'featured';
+  setActiveRoom('all');
+  updateCatalog();
+  searchInput.focus();
+}
+
+// Applies the filters, redraws the grid and updates the counter text
 function updateCatalog() {
-  renderProducts(getFilteredProducts(products, filters));
+  const visible = getFilteredProducts(products, filters);
+  renderProducts(visible);
+
+  if (visible.length === 0) {
+    productList.appendChild(createEmptyState());
+  }
+
+  let text = 'Showing ' + pluralize(visible.length, 'product');
+  if (filters.room !== 'all') {
+    text += ' for ' + getRoomLabel(filters.room).toLowerCase();
+  }
+  resultsCount.textContent = text + '.';
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -109,6 +149,13 @@ document.addEventListener('DOMContentLoaded', function () {
   setActiveRoom(filters.room);
   renderCompareTable(products);
   updateCatalog();
+
+  // The reset button is created later, so the click is caught on the grid
+  productList.addEventListener('click', function (event) {
+    if (event.target.id === 'reset-filters') {
+      resetFilters();
+    }
+  });
 
   // "change" fires once a new option is chosen
   sortSelect.addEventListener('change', function (event) {

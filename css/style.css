@@ -1465,3 +1465,19 @@ img {
   font-size: 0.9375rem;
   color: var(--color-muted);
 }
+
+/* Shown by js/catalog.js when no product matches */
+.empty-state {
+  padding: 64px 24px;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  color: var(--color-muted);
+}
+
+.empty-title {
+  margin-bottom: 4px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
