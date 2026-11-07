@@ -97,8 +97,10 @@ function renderFavorites() {
     }
   });
 
-  // The hint is shown only while nothing is saved
-  empty.style.display = favoriteIds.length === 0 ? 'block' : 'none';
+  // The hint is shown only while nothing is saved, the booking link only when something is
+  const isEmpty = favoriteIds.length === 0;
+  empty.style.display = isEmpty ? 'block' : 'none';
+  document.getElementById('favorites-book').style.display = isEmpty ? 'none' : 'block';
 }
 
 // Short pop animation on the badge after a change
