@@ -1723,3 +1723,61 @@ body.no-scroll {
 .booking-form .form-check-input.is-invalid ~ .form-check-label {
   color: var(--color-danger);
 }
+
+/* ===== Contact: confirmation shown after a valid booking ===== */
+.form-success {
+  padding: 32px;
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+  animation: toast-in 0.3s ease;
+}
+
+.form-success:focus {
+  outline: none;
+}
+
+.success-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  background-color: var(--color-success);
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.success-title {
+  margin-bottom: 8px;
+  font-size: 1.75rem;
+}
+
+.success-text {
+  color: var(--color-muted);
+}
+
+.success-summary {
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.success-summary li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border-strong);
+}
+
+.success-summary li span:first-child {
+  color: var(--color-muted);
+}
+
+.success-summary li span:last-child {
+  font-weight: 600;
+  text-align: right;
+}

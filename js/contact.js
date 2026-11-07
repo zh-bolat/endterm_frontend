@@ -159,7 +159,100 @@ function validateField(field) {
   return message === '';
 }
 
+/* ===== Submitting ===== */
+
+// Checks every field (not only the first wrong one) and returns how many failed
+function validateForm(form) {
+  let errorCount = 0;
+  for (const field of form.elements) {
+    if (field.name && !validateField(field)) {
+      errorCount++;
+    }
+  }
+  return errorCount;
+}
+
+// "2026-11-20" → "Friday, 20 November"
+function formatVisitDate(value) {
+  const date = new Date(value + 'T00:00:00');
+  return date.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+}
+
+// Builds the confirmation card shown instead of the form
+function createSuccessMessage(form) {
+  const data = form.elements;
+  const topicText = data.topic.options[data.topic.selectedIndex].text;
+  const firstName = data.name.value.trim().split(/\s+/)[0];
+  const guests = Number(data.guests.value);
+
+  const box = document.createElement('div');
+  box.className = 'form-success';
+  box.setAttribute('role', 'status');
+  box.setAttribute('tabindex', '-1');
+  box.innerHTML = `
+    <span class="success-icon" aria-hidden="true">✓</span>
+    <h3 class="success-title"></h3>
+    <p class="success-text"></p>
+    <ul class="success-summary">
+      <li><span>Date</span><span class="summary-date"></span></li>
+      <li><span>Guests</span><span class="summary-guests"></span></li>
+      <li><span>Topic</span><span class="summary-topic"></span></li>
+    </ul>
+    <button class="btn btn-soft btn-small" type="button" id="book-again">Book another visit</button>`;
+
+  // textContent (not innerHTML) for anything the visitor typed
+  box.querySelector('.success-title').textContent = 'Thank you, ' + firstName + '!';
+  box.querySelector('.success-text').textContent =
+    'Your visit is booked. We will send a confirmation to ' + data.email.value.trim() + ' within one working day.';
+  box.querySelector('.summary-date').textContent = formatVisitDate(data.date.value);
+  box.querySelector('.summary-guests').textContent = guests + (guests === 1 ? ' person' : ' people');
+  box.querySelector('.summary-topic').textContent = topicText;
+  return box;
+}
+
+// Clears the form and every message so a new booking can start
+function resetBookingForm(form) {
+  form.reset();
+  form.querySelectorAll('.is-valid, .is-invalid').forEach(function (field) {
+    field.classList.remove('is-valid', 'is-invalid');
+    field.removeAttribute('aria-invalid');
+  });
+  form.querySelectorAll('.field-error').forEach(function (box) {
+    box.textContent = '';
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
+  bookingForm.addEventListener('submit', function (event) {
+    event.preventDefault(); // never reload the page; we decide what happens
+
+    const errorCount = validateForm(bookingForm);
+    if (errorCount > 0) {
+      // Move the visitor to the first field that needs attention
+      bookingForm.querySelector('.is-invalid').focus();
+      showToast('Please fix ' + errorCount + (errorCount === 1 ? ' field' : ' fields') + ' in the form', 'info');
+      return;
+    }
+
+    // All good: replace the form with a confirmation
+    const success = createSuccessMessage(bookingForm);
+    bookingForm.hidden = true;
+    bookingForm.after(success);
+    success.focus();
+    showToast('Visit booked!');
+  });
+
+  // "Book another visit" removes the confirmation and brings back an empty form
+  bookingForm.parentElement.addEventListener('click', function (event) {
+    if (event.target.id !== 'book-again') {
+      return;
+    }
+    event.target.closest('.form-success').remove();
+    resetBookingForm(bookingForm);
+    bookingForm.hidden = false;
+    bookingForm.elements.name.focus();
+  });
+
   // The date picker starts at today, so past days are greyed out
   const dateInput = bookingForm.elements.date;
   const today = getToday();
@@ -171,6 +264,9 @@ document.addEventListener('DOMContentLoaded', function () {
   fields.forEach(function (field) {
     // Leaving a field checks it ("blur" — after the visitor is done typing)
     field.addEventListener('blur', function () {
+      if (field.type === 'checkbox') {
+        return; // checked on "change" below
+      }
       if (field.value !== '' || field.classList.contains('is-invalid')) {
         validateField(field);
       }
