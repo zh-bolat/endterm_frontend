@@ -162,6 +162,20 @@ document.addEventListener('DOMContentLoaded', function () {
     openLightbox(galleryPhotos[index]);
   });
 
+  // Keyboard: Escape closes, arrow keys switch photos
+  document.addEventListener('keydown', function (event) {
+    if (!lightbox) {
+      return;
+    }
+    if (event.key === 'Escape') {
+      closeLightbox();
+    } else if (event.key === 'ArrowLeft') {
+      showLightboxPhoto(lightboxPosition - 1);
+    } else if (event.key === 'ArrowRight') {
+      showLightboxPhoto(lightboxPosition + 1);
+    }
+  });
+
   renderGalleryTabs();
   setActiveTab('all');
   renderGallery(galleryPhotos);

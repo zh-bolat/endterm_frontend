@@ -1633,7 +1633,8 @@ body.no-scroll {
   text-align: center;
 }
 
-.lightbox-img {
+/* Two classes, so the dark-theme dimming of photos does not apply here */
+.lightbox .lightbox-img {
   max-height: 80vh;
   margin: 0 auto;
   border-radius: var(--radius);
@@ -1670,4 +1671,17 @@ body.no-scroll {
   position: absolute;
   top: 20px;
   right: 20px;
+}
+
+/* Phones: arrows go below the photo */
+@media (max-width: 575.98px) {
+  .lightbox {
+    flex-wrap: wrap;
+    align-content: center;
+  }
+
+  .lightbox-figure {
+    order: -1;
+    flex-basis: 100%;
+  }
 }
