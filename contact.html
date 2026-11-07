@@ -94,27 +94,38 @@
               <h2 class="form-title">Book a showroom visit</h2>
               <p class="form-intro">We reply within one working day to confirm your time.</p>
 
-              <form class="booking-form" action="#" method="post">
+              <!-- novalidate turns off the browser bubbles: js/contact.js checks every field
+                   and writes its own message under it -->
+              <form class="booking-form" id="booking-form" action="#" method="post" novalidate>
                 <div class="row g-3">
                   <div class="col-12">
                     <label class="form-label" for="visit-name">Full name</label>
-                    <input class="form-control" type="text" id="visit-name" name="name" autocomplete="name" required>
+                    <input class="form-control" type="text" id="visit-name" name="name" autocomplete="name" aria-describedby="visit-name-error" required>
+                    <p class="field-error" id="visit-name-error"></p>
                   </div>
                   <div class="col-12 col-md-6">
                     <label class="form-label" for="visit-email">Email</label>
-                    <input class="form-control" type="email" id="visit-email" name="email" autocomplete="email" required>
+                    <input class="form-control" type="email" id="visit-email" name="email" autocomplete="email" placeholder="you@example.com" aria-describedby="visit-email-error" required>
+                    <p class="field-error" id="visit-email-error"></p>
                   </div>
                   <div class="col-12 col-md-6">
                     <label class="form-label" for="visit-phone">Phone (optional)</label>
-                    <input class="form-control" type="tel" id="visit-phone" name="phone" autocomplete="tel" placeholder="+7 700 000 00 00">
+                    <input class="form-control" type="tel" id="visit-phone" name="phone" autocomplete="tel" placeholder="+7 700 000 00 00" aria-describedby="visit-phone-error">
+                    <p class="field-error" id="visit-phone-error"></p>
                   </div>
                   <div class="col-12 col-md-6">
                     <label class="form-label" for="visit-date">Preferred date</label>
-                    <input class="form-control" type="date" id="visit-date" name="date" required>
+                    <input class="form-control" type="date" id="visit-date" name="date" aria-describedby="visit-date-error" required>
+                    <p class="field-error" id="visit-date-error"></p>
                   </div>
                   <div class="col-12 col-md-6">
+                    <label class="form-label" for="visit-guests">Number of guests</label>
+                    <input class="form-control" type="number" id="visit-guests" name="guests" min="1" max="6" value="1" aria-describedby="visit-guests-error" required>
+                    <p class="field-error" id="visit-guests-error"></p>
+                  </div>
+                  <div class="col-12">
                     <label class="form-label" for="visit-topic">Topic</label>
-                    <select class="form-select" id="visit-topic" name="topic" required>
+                    <select class="form-select" id="visit-topic" name="topic" aria-describedby="visit-topic-error" required>
                       <option value="" selected disabled>Choose a room</option>
                       <option value="living">Living</option>
                       <option value="bedroom">Bedroom</option>
@@ -122,16 +133,19 @@
                       <option value="workspace">Workspace</option>
                       <option value="custom">Custom order</option>
                     </select>
+                    <p class="field-error" id="visit-topic-error"></p>
                   </div>
                   <div class="col-12">
                     <label class="form-label" for="visit-message">Message (optional)</label>
-                    <textarea class="form-control" id="visit-message" name="message" rows="5" placeholder="Tell us about your room and what you are looking for"></textarea>
+                    <textarea class="form-control" id="visit-message" name="message" rows="5" maxlength="500" placeholder="Tell us about your room and what you are looking for" aria-describedby="visit-message-error"></textarea>
+                    <p class="field-error" id="visit-message-error"></p>
                   </div>
                   <div class="col-12">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="visit-consent" name="consent" required>
+                      <input class="form-check-input" type="checkbox" id="visit-consent" name="consent" aria-describedby="visit-consent-error" required>
                       <label class="form-check-label" for="visit-consent">I agree that Forma may contact me about this visit.</label>
                     </div>
+                    <p class="field-error" id="visit-consent-error"></p>
                   </div>
                   <div class="col-12">
                     <button class="btn btn-accent" type="submit">Book my visit</button>
@@ -218,5 +232,6 @@
   <script src="js/utils.js"></script>
   <script src="js/main.js"></script>
   <script src="js/effects.js"></script>
+  <script src="js/contact.js"></script>
 </body>
 </html>

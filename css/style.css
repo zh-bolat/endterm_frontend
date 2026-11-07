@@ -1685,3 +1685,41 @@ body.no-scroll {
     flex-basis: 100%;
   }
 }
+
+/* ===== Contact: validation messages (written by js/contact.js) ===== */
+.field-error {
+  min-height: 0;
+  margin: 6px 0 0;
+  font-size: 0.875rem;
+  color: var(--color-danger);
+}
+
+.field-error:empty {
+  display: none;
+}
+
+/* Red or green border instead of Bootstrap's icons */
+.booking-form .form-control.is-invalid,
+.booking-form .form-select.is-invalid {
+  border-color: var(--color-danger);
+  background-image: none;
+}
+
+.booking-form .form-control.is-valid,
+.booking-form .form-select.is-valid {
+  border-color: var(--color-success);
+  background-image: none;
+}
+
+.booking-form .form-control.is-invalid:focus,
+.booking-form .form-select.is-invalid:focus {
+  box-shadow: 0 0 0 4px rgba(215, 0, 21, 0.12);
+}
+
+.booking-form .form-check-input.is-invalid {
+  border-color: var(--color-danger);
+}
+
+.booking-form .form-check-input.is-invalid ~ .form-check-label {
+  color: var(--color-danger);
+}
