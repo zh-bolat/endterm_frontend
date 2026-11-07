@@ -1781,3 +1781,16 @@ body.no-scroll {
   font-weight: 600;
   text-align: right;
 }
+
+.char-counter {
+  margin: 6px 0 0;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.char-counter.is-near-limit {
+  color: #c93400;
+  font-weight: 600;
+}

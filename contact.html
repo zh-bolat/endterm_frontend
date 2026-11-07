@@ -137,8 +137,11 @@
                   </div>
                   <div class="col-12">
                     <label class="form-label" for="visit-message">Message (optional)</label>
-                    <textarea class="form-control" id="visit-message" name="message" rows="5" maxlength="500" placeholder="Tell us about your room and what you are looking for" aria-describedby="visit-message-error"></textarea>
-                    <p class="field-error" id="visit-message-error"></p>
+                    <textarea class="form-control" id="visit-message" name="message" rows="5" maxlength="500" placeholder="Tell us about your room and what you are looking for" aria-describedby="visit-message-error visit-message-counter"></textarea>
+                    <div class="d-flex justify-content-between gap-3">
+                      <p class="field-error" id="visit-message-error"></p>
+                      <p class="char-counter ms-auto" id="visit-message-counter">0 / 500</p>
+                    </div>
                   </div>
                   <div class="col-12">
                     <div class="form-check">

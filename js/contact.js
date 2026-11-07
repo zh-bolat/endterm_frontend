@@ -159,6 +159,16 @@ function validateField(field) {
   return message === '';
 }
 
+/* ===== Character counter under the message ===== */
+function updateCharCounter() {
+  const length = bookingForm.elements.message.value.length;
+  const counter = document.getElementById('visit-message-counter');
+  counter.textContent = length + ' / ' + MAX_MESSAGE_LENGTH;
+
+  // Orange when fewer than 50 characters are left
+  counter.classList.toggle('is-near-limit', length > MAX_MESSAGE_LENGTH - 50);
+}
+
 /* ===== Submitting ===== */
 
 // Checks every field (not only the first wrong one) and returns how many failed
@@ -220,6 +230,7 @@ function resetBookingForm(form) {
   form.querySelectorAll('.field-error').forEach(function (box) {
     box.textContent = '';
   });
+  updateCharCounter();
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -252,6 +263,8 @@ document.addEventListener('DOMContentLoaded', function () {
     bookingForm.hidden = false;
     bookingForm.elements.name.focus();
   });
+
+  bookingForm.elements.message.addEventListener('input', updateCharCounter);
 
   // The date picker starts at today, so past days are greyed out
   const dateInput = bookingForm.elements.date;
