@@ -209,7 +209,7 @@ function validateForm(form) {
   return errorCount;
 }
 
-// "2026-11-20" → "Friday, 20 November"
+// "2026-11-20" → "Friday 20 November"
 function formatVisitDate(value) {
   const date = new Date(value + 'T00:00:00');
   return date.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });

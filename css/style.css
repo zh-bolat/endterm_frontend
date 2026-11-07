@@ -65,6 +65,12 @@
 }
 
 /* ===== Base — element selectors ===== */
+/* Bootstrap turns on CSS smooth scrolling; jQuery animate() in js/effects.js
+   already scrolls smoothly, and the two together make the page stutter */
+:root {
+  scroll-behavior: auto;
+}
+
 body {
   font-family: var(--font-sans);
   font-size: 17px;
@@ -1812,4 +1818,32 @@ body.no-scroll {
   color: var(--color-accent);
   font-size: 0.875rem;
   font-weight: 500;
+}
+
+/* ===== Endterm components on phones (≤ 575.98px) ===== */
+@media (max-width: 575.98px) {
+  /* Bootstrap .g-5 gutters are wider than the phone side padding */
+  .row.g-5 {
+    --bs-gutter-x: 2.5rem;
+  }
+
+  .toolbar-sort {
+    flex-basis: 100%;
+  }
+
+  .toast-stack {
+    right: 16px;
+    left: 16px;
+    bottom: 16px;
+    align-items: center;
+  }
+
+  .back-to-top {
+    left: 16px;
+    bottom: 16px;
+  }
+
+  .form-success {
+    padding: 24px;
+  }
 }
