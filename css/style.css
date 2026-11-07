@@ -1794,3 +1794,22 @@ body.no-scroll {
   color: #c93400;
   font-weight: 600;
 }
+
+/* Saved products listed inside the booking form */
+.booking-favorites {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.booking-favorites li {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-size: 0.875rem;
+  font-weight: 500;
+}

@@ -169,6 +169,33 @@ function updateCharCounter() {
   counter.classList.toggle('is-near-limit', length > MAX_MESSAGE_LENGTH - 50);
 }
 
+/* ===== Favorites from the catalog, shown inside the form ===== */
+function renderBookingFavorites() {
+  const wrap = document.getElementById('booking-favorites-wrap');
+  const list = document.getElementById('booking-favorites');
+  const names = getFavoriteNames();
+
+  list.innerHTML = '';
+  for (const name of names) {
+    const item = document.createElement('li');
+    item.textContent = name;
+    list.appendChild(item);
+  }
+  wrap.hidden = names.length === 0;
+}
+
+// Returns the names of the saved products, e.g. ["Nord sofa", "Kai dining chair"]
+function getFavoriteNames() {
+  const names = [];
+  getFavorites().forEach(function (id) {
+    const product = findProductById(id);
+    if (product) {
+      names.push(product.name);
+    }
+  });
+  return names;
+}
+
 /* ===== Submitting ===== */
 
 // Checks every field (not only the first wrong one) and returns how many failed
@@ -207,6 +234,7 @@ function createSuccessMessage(form) {
       <li><span>Date</span><span class="summary-date"></span></li>
       <li><span>Guests</span><span class="summary-guests"></span></li>
       <li><span>Topic</span><span class="summary-topic"></span></li>
+      <li class="summary-pieces-row"><span>Pieces to prepare</span><span class="summary-pieces"></span></li>
     </ul>
     <button class="btn btn-soft btn-small" type="button" id="book-again">Book another visit</button>`;
 
@@ -217,6 +245,13 @@ function createSuccessMessage(form) {
   box.querySelector('.summary-date').textContent = formatVisitDate(data.date.value);
   box.querySelector('.summary-guests').textContent = guests + (guests === 1 ? ' person' : ' people');
   box.querySelector('.summary-topic').textContent = topicText;
+
+  const pieces = getFavoriteNames();
+  if (pieces.length > 0) {
+    box.querySelector('.summary-pieces').textContent = pieces.join(', ');
+  } else {
+    box.querySelector('.summary-pieces-row').remove();
+  }
   return box;
 }
 
@@ -265,6 +300,9 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   bookingForm.elements.message.addEventListener('input', updateCharCounter);
+
+  renderBookingFavorites();
+  document.addEventListener('favorites:change', renderBookingFavorites);
 
   // The date picker starts at today, so past days are greyed out
   const dateInput = bookingForm.elements.date;
