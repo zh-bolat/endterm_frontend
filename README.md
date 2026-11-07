@@ -8,7 +8,8 @@ endterm we kept the same topic, team, pages and design and made the site
 interactive with JavaScript and jQuery. Every new feature lives on the page where
 a visitor needs it. There is no separate demo page.
 
-**Live site:** _add the GitHub Pages link here after publishing_
+**Live site:** [https://zh-bolat.github.io/endterm_frontend/](https://zh-bolat.github.io/endterm_frontend/)  
+**Repository:** [github.com/zh-bolat/endterm_frontend](https://github.com/zh-bolat/endterm_frontend)
 
 ## Team
 
